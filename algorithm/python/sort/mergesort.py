@@ -1,29 +1,13 @@
-def merge_sort(arr):
-    if not arr:
-        return arr
+def merge_sort(arr) -> list:
 
-    start = 0
-    end = len(arr) - 1
-
-    return rec_merge_sort(arr, start, end)
-
-def rec_merge_sort(arr, start, end):
-
-    if len(arr) == 1:
-        return arr
-
-    if len(arr) == 2:
-        if arr[0] > arr[1]:
-            return [arr[1], arr[0]]
-
+    if len(arr) <= 1:
         return arr
 
     pivot = int(len(arr) / 2)
-    return merge(rec_merge_sort(arr[:pivot], start, pivot - 1),
-                 rec_merge_sort(arr[pivot:], pivot, end))
+    return merge(merge_sort(arr[:pivot]), merge_sort(arr[pivot:]))
 
-def merge(arr1, arr2):
-    print(arr1, arr2)
+
+def merge(arr1, arr2) -> list:
     ret = list()
     len1 = len(arr1)
     len2 = len(arr2)
@@ -33,8 +17,6 @@ def merge(arr1, arr2):
     arr2_val = arr2[j]
 
     while len(ret) < len1 + len2:
-        print('arr1:', i, ':', arr1[i])
-        print('arr2:', j, ':', arr2[j])
 
         if arr1_val < arr2_val:
             ret.append(arr1_val)
@@ -51,8 +33,6 @@ def merge(arr1, arr2):
                 arr2_val = arr2[j]
             else:
                 arr2_val = float('inf')
-        print('condition:', len(ret) , ':',  len1, ':',  len2)
-
     return ret
 
 if __name__ == '__main__':
